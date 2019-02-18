@@ -134,6 +134,24 @@ $.sound = function(filename) {
 $(document).bind("contextmenu", function (e) {
     e.preventDefault();
 });
+//users counter
+$.getJSON('https://ipapi.co/json/', function(userInfo) {
+    $.get("https://api.myjson.com/bins/ie5be", function(data, textStatus, jqXHR) {
+        if (!data.map(element => element.ip).includes(userInfo.ip))
+        {
+            data.push(userInfo);
+        }
+        $.ajax({
+            url:"https://api.myjson.com/bins/ie5be",
+            type:"PUT",
+            data: JSON.stringify(data, null, 2),
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+            success: function(data, textStatus, jqXHR){
+            }
+        }); 
+    });
+});
 $(document).ready(function() {
     function isTouch() {
         var prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');

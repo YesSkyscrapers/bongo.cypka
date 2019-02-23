@@ -134,6 +134,7 @@ $.sound = function(filename) {
 $(document).bind("contextmenu", function (e) {
     e.preventDefault();
 });
+/*
 //users counter
 $.getJSON('https://ipapi.co/json/', function(userInfo) {
     $.get("https://api.myjson.com/bins/ie5be", function(data, textStatus, jqXHR) {
@@ -152,6 +153,7 @@ $.getJSON('https://ipapi.co/json/', function(userInfo) {
         }); 
     });
 });
+*/
 $(document).ready(function() {
     function isTouch() {
         var prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');

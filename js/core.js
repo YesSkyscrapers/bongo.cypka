@@ -148,7 +148,7 @@ $(document).ready(function() {
             e.preventDefault();
             var action = ActionPerKeyEnum[keyboardEquivalent.toUpperCase()];
             var key = KeyEnum[keyboardEquivalent.toUpperCase()];
-            if (instrument != undefined && key != undefined) {
+            if (action != undefined && key != undefined) {
                 if (action == ActionEnum.CHOOSE_FORM)
                 {
                     var form = FormPerKeyEnum[key];
@@ -157,7 +157,7 @@ $(document).ready(function() {
                 else
                 {
                     $.click(action, key, true);
-                    $.wait(function(){ $.click(action, key, false) }, (instrument == InstrumentEnum.MEOW ? 250 : 80));
+                    $.wait(function(){ $.click(action, key, false) }, (action == ActionEnum.KRYA ? 250 : 80));
                 }
             }
         }

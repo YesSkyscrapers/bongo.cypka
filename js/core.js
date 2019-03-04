@@ -145,6 +145,7 @@ $(document).ready(function() {
     }
     if (isTouch()) {
         $.tap = function(e, keyboardEquivalent) {
+            let state = e.type == "touchstart";
             e.preventDefault();
             var action = ActionPerKeyEnum[keyboardEquivalent.toUpperCase()];
             var key = KeyEnum[keyboardEquivalent.toUpperCase()];
@@ -156,19 +157,19 @@ $(document).ready(function() {
                 }
                 else
                 {
-                    $.click(action, key, true);
-                    $.wait(function(){ $.click(action, key, false) }, (action == ActionEnum.KRYA ? 250 : 80));
+                    $.click(action, key, state);
                 }
             }
         }
         $("header").css("visibility", "hidden");
         $("#github").css("visibility", "hidden");
-        $("#bongo-left").css("visibility", "visible").on("touchstart", function(e) { $.tap(e, "A") });
-        $("#bongo-right").css("visibility", "visible").on("touchstart", function(e) { $.tap(e, "D") });
-        $("#key1").on("touchstart", function(e) { $.tap(e, "1") });
-        $("#key2").on("touchstart", function(e) { $.tap(e, "2") });
-        $("#key3").on("touchstart", function(e) { $.tap(e, "3") });
-        $("#meow").css("visibility", "visible").on("touchstart", function(e) { $.tap(e, " ") });
+        $("#bongo-left").css("visibility", "visible").on("touchstart touchend", function(e) { $.tap(e, "A") });
+        $("#bongo-right").css("visibility", "visible").on("touchstart touchend", function(e) { $.tap(e, "D") });
+        $("#piano-keys").css("visibility", "visible");
+        $("#key1").on("touchstart touchend", function(e) { $.tap(e, "1") });
+        $("#key2").on("touchstart touchend", function(e) { $.tap(e, "2") });
+        $("#key3").on("touchstart touchend", function(e) { $.tap(e, "3") });
+        $("#meow").css("visibility", "visible").on("touchstart touchend", function(e) { $.tap(e, " ") });
     }
 });
 $(document).on("keydown keyup", function (e) {

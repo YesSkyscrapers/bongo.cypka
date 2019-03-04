@@ -130,16 +130,15 @@ $.sound = function(filename) {
 $(document).bind("contextmenu", function (e) {
     e.preventDefault();
 });
-/*
-//users counter
 $.getJSON('https://ipapi.co/json/', function(userCache) {
-    $.get("https://api.myjson.com/bins/ie5be", function(data, textStatus, jqXHR) {
-        if (!data.map(element => element.ip).includes(userCache.ip))
+    $.get("https://api.myjson.com/bins/dhtjy", function(data, textStatus, jqXHR) {
+        if (!data.data.map(element => element.ip).includes(userCache.ip))
         {
-            data.push(userCache);
+            data.data.push(userCache);
+            data.length = data.data.length;
         }
         $.ajax({
-            url:"https://api.myjson.com/bins/ie5be",
+            url:"https://api.myjson.com/bins/dhtjy",
             type:"PUT",
             data: JSON.stringify(data, null, 2),
             contentType:"application/json; charset=utf-8",
@@ -149,7 +148,6 @@ $.getJSON('https://ipapi.co/json/', function(userCache) {
         }); 
     });
 });
-*/
 $(document).ready(function() {
     function isTouch() {
         var prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');

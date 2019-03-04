@@ -29,43 +29,17 @@ var FormPerKeyEnum = {
     "2" : FormEnum.TOSHA,
     "3" : FormEnum.KIGURUMI
 }
-var ClickKeyEquivalentEnum = {
-    "1" : "A",
-    "2" : " ",
-    "3" : "D"
-}
 $.state = {
     l: false,
     r: false,
     m: false
 }
-//var pressed = [];
+
 $(document).ready(function() {
     lowLag.init({'urlPrefix':'./sounds/'});
-    lowLag.load(['bongo0.mp3','bongo0.wav'],'bongo0');
-    lowLag.load(['bongo1.mp3','bongo1.wav'],'bongo1');
-    lowLag.load(['keyboard1.mp3','keyboard1.wav'],'keyboard1');
-    lowLag.load(['keyboard2.mp3','keyboard2.wav'],'keyboard2');
-    lowLag.load(['keyboard3.mp3','keyboard3.wav'],'keyboard3');
-    lowLag.load(['keyboard4.mp3','keyboard4.wav'],'keyboard4');
-    lowLag.load(['keyboard5.mp3','keyboard5.wav'],'keyboard5');
-    lowLag.load(['keyboard6.mp3','keyboard6.wav'],'keyboard6');
-    lowLag.load(['keyboard7.mp3','keyboard7.wav'],'keyboard7');
-    lowLag.load(['keyboard8.mp3','keyboard8.wav'],'keyboard8');
-    lowLag.load(['keyboard9.mp3','keyboard9.wav'],'keyboard9');
-    lowLag.load(['keyboard0.mp3','keyboard0.wav'],'keyboard0');
-    lowLag.load(['meow.mp3','meow.wav'],'meow-1');
-    lowLag.load(['cymbal.mp3','cymbal.wav'],'cymbal1');
-    lowLag.load(['marimba1.mp3','marimba1.wav'],'marimba1');
-    lowLag.load(['marimba2.mp3','marimba2.wav'],'marimba2');
-    lowLag.load(['marimba3.mp3','marimba3.wav'],'marimba3');
-    lowLag.load(['marimba4.mp3','marimba4.wav'],'marimba4');
-    lowLag.load(['marimba5.mp3','marimba5.wav'],'marimba5');
-    lowLag.load(['marimba6.mp3','marimba6.wav'],'marimba6');
-    lowLag.load(['marimba7.mp3','marimba7.wav'],'marimba7');
-    lowLag.load(['marimba8.mp3','marimba8.wav'],'marimba8');
-    lowLag.load(['marimba9.mp3','marimba9.wav'],'marimba9');
-    lowLag.load(['marimba0.mp3','marimba0.wav'],'marimba0');
+    lowLag.load(['keyboard.mp3','keyboard.wav'],'keyboard');
+    lowLag.load(['mouse.mp3','mouse.wav'],'mouse');
+    lowLag.load(['krya.mp3','krya.wav'],'krya');
 });
 Array.prototype.remove = function(el) {
     return this.splice(this.indexOf(el), 1);
@@ -92,6 +66,15 @@ $.click = function(action, key, state){
         $('.catentity#'+bodyPrefix+'2').css("visibility", (state ? "visible" : "hidden"));
 
         $.state[bodyPrefix] = state;
+
+        if (state)
+        {
+            switch(bodyPrefix){
+                case 'm': $.sound('krya');
+                case 'r': $.sound('keyboard');
+                case 'l': $.sound('mouse');
+            }
+        }
     }
 }
 $.play = function(instrument, key, state) {
@@ -171,61 +154,23 @@ $(document).ready(function() {
                     var form = FormPerKeyEnum[key];
                     $.chooseForm(form, key);
                 }
-                //$.play(instrument, key, true);
-                //$.wait(function(){ $.play(instrument, key, false) }, (instrument == InstrumentEnum.MEOW ? 250 : 80));
+                else
+                {
+                    $.click(action, key, true);
+                    $.wait(function(){ $.click(action, key, false) }, (instrument == InstrumentEnum.MEOW ? 250 : 80));
+                }
             }
         }
         $("header").css("visibility", "hidden");
         $("#github").css("visibility", "hidden");
         $("#bongo-left").css("visibility", "visible").on("touchstart", function(e) { $.tap(e, "A") });
         $("#bongo-right").css("visibility", "visible").on("touchstart", function(e) { $.tap(e, "D") });
-        $("#cymbal-left").css("visibility", "visible").on("touchstart", function(e) { $.tap(e, "C") });
-        $("#piano-keys").css("visibility", "visible");
         $("#key1").on("touchstart", function(e) { $.tap(e, "1") });
         $("#key2").on("touchstart", function(e) { $.tap(e, "2") });
         $("#key3").on("touchstart", function(e) { $.tap(e, "3") });
-        $("#key4").on("touchstart", function(e) { $.tap(e, "4") });
-        $("#key5").on("touchstart", function(e) { $.tap(e, "5") });
-        $("#key6").on("touchstart", function(e) { $.tap(e, "6") });
-        $("#key7").on("touchstart", function(e) { $.tap(e, "7") });
-        $("#key8").on("touchstart", function(e) { $.tap(e, "8") });
-        $("#key9").on("touchstart", function(e) { $.tap(e, "9") });
-        $("#key0").on("touchstart", function(e) { $.tap(e, "0") });
-        $("#marimba-keys").css("visibility", "visible");
-        $("#keyQ").on("touchstart", function(e) { $.tap(e, "Q") });
-        $("#keyW").on("touchstart", function(e) { $.tap(e, "W") });
-        $("#keyE").on("touchstart", function(e) { $.tap(e, "E") });
-        $("#keyR").on("touchstart", function(e) { $.tap(e, "R") });
-        $("#keyT").on("touchstart", function(e) { $.tap(e, "T") });
-        $("#keyY").on("touchstart", function(e) { $.tap(e, "Y") });
-        $("#keyU").on("touchstart", function(e) { $.tap(e, "U") });
-        $("#keyI").on("touchstart", function(e) { $.tap(e, "I") });
-        $("#keyO").on("touchstart", function(e) { $.tap(e, "O") });
-        $("#keyP").on("touchstart", function(e) { $.tap(e, "P") });
         $("#meow").css("visibility", "visible").on("touchstart", function(e) { $.tap(e, " ") });
     }
 });
-$(document).on("mousedown mouseup", function (e) {
-    var keyboardEquivalent = ClickKeyEquivalentEnum[e.which];
-    if (keyboardEquivalent != undefined) {
-        var instrument = InstrumentPerKeyEnum[keyboardEquivalent.toUpperCase()];
-        var key = KeyEnum[keyboardEquivalent.toUpperCase()];
-        if (instrument != undefined && key != undefined) {
-            $.play(instrument, key, e.type === "mousedown");
-        }
-    }
-});
-/*
-$(document).keydown(function (e) {
-    console.log(e);
-    console.log('down')
-    console.log(e.key.toUpperCase());
-});
-$(document).keyup(function (e) {
-    console.log('up')
-    console.log(e.key.toUpperCase());
-});*/
-
 $(document).on("keydown keyup", function (e) {
     var action = ActionPerKeyEnum[e.key.toUpperCase()];
     var key = KeyEnum[e.key.toUpperCase()];

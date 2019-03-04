@@ -1,70 +1,45 @@
-var InstrumentEnum = {
-    BONGO : 0,
-    KEYBOARD : 1,
-    MEOW: 3,
-    CYMBAL: 4,
-    MARIMBA: 5
+var ActionEnum = {
+    CHOOSE_FORM: 0,
+    CLICK: 1,
+    KRYA: 2
+}
+var ActionPerKeyEnum = {
+    "1" : ActionEnum.CHOOSE_FORM,
+    "2" : ActionEnum.CHOOSE_FORM,
+    "3" : ActionEnum.CHOOSE_FORM,
+    "A" : ActionEnum.CLICK,
+    "D" : ActionEnum.CLICK,
+    " " : ActionEnum.KRYA
+}
+var FormEnum = {
+    SCHOOL: 0,
+    TOSHA: 1,
+    KIGURUMI: 2
 }
 var KeyEnum = {
     "A" : 1,
-    "D" : 0,
+    "D" : 2,
     "1" : 1,
     "2" : 2,
     "3" : 3,
-    "4" : 4,
-    "5" : 5,
-    "6" : 6,
-    "7" : 7,
-    "8" : 8,
-    "9" : 9,
-    "0" : 0,
-    " " : -1,
-    "C" : 1,
-    "Q" : 1,
-    "W" : 2,
-    "E" : 3,
-    "R" : 4,
-    "T" : 5,
-    "Y" : 6, //US
-    "Z" : 6, //Germany
-    "U" : 7,
-    "I" : 8,
-    "O" : 9,
-    "P" : 0
+    " " : -1
 }
-var InstrumentPerKeyEnum = {
-    "A" : InstrumentEnum.BONGO,
-    "D" : InstrumentEnum.BONGO,
-    "1" : InstrumentEnum.KEYBOARD,
-    "2" : InstrumentEnum.KEYBOARD,
-    "3" : InstrumentEnum.KEYBOARD,
-    "4" : InstrumentEnum.KEYBOARD,
-    "5" : InstrumentEnum.KEYBOARD,
-    "6" : InstrumentEnum.KEYBOARD,
-    "7" : InstrumentEnum.KEYBOARD,
-    "8" : InstrumentEnum.KEYBOARD,
-    "9" : InstrumentEnum.KEYBOARD,
-    "0" : InstrumentEnum.KEYBOARD,
-    " " : InstrumentEnum.MEOW,
-    "C" : InstrumentEnum.CYMBAL,
-    "Q" : InstrumentEnum.MARIMBA,
-    "W" : InstrumentEnum.MARIMBA,
-    "E" : InstrumentEnum.MARIMBA,
-    "R" : InstrumentEnum.MARIMBA,
-    "T" : InstrumentEnum.MARIMBA,
-    "Y" : InstrumentEnum.MARIMBA, //US
-    "Z" : InstrumentEnum.MARIMBA, //Germany
-    "U" : InstrumentEnum.MARIMBA,
-    "I" : InstrumentEnum.MARIMBA,
-    "O" : InstrumentEnum.MARIMBA,
-    "P" : InstrumentEnum.MARIMBA
+var FormPerKeyEnum = {
+    "1" : FormEnum.SCHOOL,
+    "2" : FormEnum.TOSHA,
+    "3" : FormEnum.KIGURUMI
 }
 var ClickKeyEquivalentEnum = {
     "1" : "A",
     "2" : " ",
     "3" : "D"
 }
-var pressed = [];
+$.state = {
+    l: false,
+    r: false,
+    m: false
+}
+//var pressed = [];
 $(document).ready(function() {
     lowLag.init({'urlPrefix':'./sounds/'});
     lowLag.load(['bongo0.mp3','bongo0.wav'],'bongo0');
@@ -98,6 +73,27 @@ Array.prototype.remove = function(el) {
 $.wait = function(callback, ms) {
     return window.setTimeout(callback, ms);
 }
+$.chooseForm = function(form, key) {
+    $('.catentity#main').css("background-image", "url('images/"+form+"/main.png')");
+    $('.catentity#l1').css("background-image", "url('images/"+form+"/l1.png')");
+    $('.catentity#l2').css("background-image", "url('images/"+form+"/l2.png')");
+    $('.catentity#r1').css("background-image", "url('images/"+form+"/r1.png')");
+    $('.catentity#r2').css("background-image", "url('images/"+form+"/r2.png')");
+    $('.catentity#m1').css("background-image", "url('images/"+form+"/m1.png')");
+    $('.catentity#m2').css("background-image", "url('images/"+form+"/m2.png')");
+    
+}
+$.click = function(action, key, state){
+    let bodyPrefix = (action == ActionEnum.KRYA ? 'm' : (key == 1 ? 'r' : 'l'));
+
+    if ($.state[bodyPrefix] != state)
+    {
+        $('.catentity#'+bodyPrefix+'1').css("visibility", (state ? "hidden" : "visible"));
+        $('.catentity#'+bodyPrefix+'2').css("visibility", (state ? "visible" : "hidden"));
+
+        $.state[bodyPrefix] = state;
+    }
+}
 $.play = function(instrument, key, state) {
     var instrumentName = Object.keys(InstrumentEnum).find(k => InstrumentEnum[k] === instrument).toLowerCase();
     var commonKey = KeyEnum[key];
@@ -123,9 +119,9 @@ $.play = function(instrument, key, state) {
         pressed.remove(commonKey);
     }
     if (instrument == InstrumentEnum.MEOW) {
-        $('#mouth').css("background-image", "url('images/m" + (state === true ? "2" : "1") + ".png')");
+        $('#mouth').css("background-image", "url('images/1/m" + (state === true ? "2" : "1") + ".png')");
     } else {
-        $(id).css("background-image", "url('images/" + (paw == 0 ? "l" : "r") + (state === true ? "2" : "1") + ".png')");
+        $(id).css("background-image", "url('images/1/" + (paw == 0 ? "l" : "r") + (state === true ? "2" : "1") + ".png')");
     }
 }
 $.sound = function(filename) {
@@ -136,11 +132,11 @@ $(document).bind("contextmenu", function (e) {
 });
 /*
 //users counter
-$.getJSON('https://ipapi.co/json/', function(userInfo) {
+$.getJSON('https://ipapi.co/json/', function(userCache) {
     $.get("https://api.myjson.com/bins/ie5be", function(data, textStatus, jqXHR) {
-        if (!data.map(element => element.ip).includes(userInfo.ip))
+        if (!data.map(element => element.ip).includes(userCache.ip))
         {
-            data.push(userInfo);
+            data.push(userCache);
         }
         $.ajax({
             url:"https://api.myjson.com/bins/ie5be",
@@ -169,11 +165,16 @@ $(document).ready(function() {
     if (isTouch()) {
         $.tap = function(e, keyboardEquivalent) {
             e.preventDefault();
-            var instrument = InstrumentPerKeyEnum[keyboardEquivalent.toUpperCase()];
+            var action = ActionPerKeyEnum[keyboardEquivalent.toUpperCase()];
             var key = KeyEnum[keyboardEquivalent.toUpperCase()];
             if (instrument != undefined && key != undefined) {
-                $.play(instrument, key, true);
-                $.wait(function(){ $.play(instrument, key, false) }, (instrument == InstrumentEnum.MEOW ? 250 : 80));
+                if (action == ActionEnum.CHOOSE_FORM)
+                {
+                    var form = FormPerKeyEnum[key];
+                    $.chooseForm(form, key);
+                }
+                //$.play(instrument, key, true);
+                //$.wait(function(){ $.play(instrument, key, false) }, (instrument == InstrumentEnum.MEOW ? 250 : 80));
             }
         }
         $("header").css("visibility", "hidden");
@@ -216,10 +217,29 @@ $(document).on("mousedown mouseup", function (e) {
         }
     }
 });
+/*
+$(document).keydown(function (e) {
+    console.log(e);
+    console.log('down')
+    console.log(e.key.toUpperCase());
+});
+$(document).keyup(function (e) {
+    console.log('up')
+    console.log(e.key.toUpperCase());
+});*/
+
 $(document).on("keydown keyup", function (e) {
-    var instrument = InstrumentPerKeyEnum[e.key.toUpperCase()];
+    var action = ActionPerKeyEnum[e.key.toUpperCase()];
     var key = KeyEnum[e.key.toUpperCase()];
-    if (instrument != undefined && key != undefined) {
-        $.play(instrument, key, e.type === "keydown");
+    if (action != undefined && key != undefined) {
+        if (action == ActionEnum.CHOOSE_FORM)
+        {
+            var form = FormPerKeyEnum[key];
+            $.chooseForm(form, key);
+        }
+        else
+        {
+            $.click(action, key, e.type == 'keydown');
+        }
     }
 });

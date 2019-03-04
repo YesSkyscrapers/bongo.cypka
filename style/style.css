@@ -102,29 +102,29 @@ a {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-#bongo {
-    background-image: url('../images/bongo.png');
+#main {
+    background-image: url('../images/1/main.png');
 }
-#keyboard {
-    background-image: url('../images/keyboard.png');
+#m1 {
+    background-image: url('../images/1/m1.png');
+}
+#l1 {
+    background-image: url('../images/1/l1.png');
+}
+#r1 {
+    background-image: url('../images/1/r1.png');
+}
+#m2 {
+    background-image: url('../images/1/m2.png');
     visibility: hidden;
 }
-#cymbal {
-    background-image: url('../images/cymbal.png');
+#l2 {
+    background-image: url('../images/1/l2.png');
     visibility: hidden;
 }
-#marimba {
-    background-image: url('../images/marimba.png');
+#r2 {
+    background-image: url('../images/1/r2.png');
     visibility: hidden;
-}
-#mouth {
-    background-image: url('../images/m1.png');
-}
-#lpaw {
-    background-image: url('../images/l1.png');
-}
-#rpaw {
-    background-image: url('../images/r1.png');
 }
 footer {
     position: absolute;

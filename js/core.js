@@ -70,9 +70,9 @@ $.click = function(action, key, state){
         if (state)
         {
             switch(bodyPrefix){
-                case 'm': $.sound('krya');
-                case 'r': $.sound('keyboard');
-                case 'l': $.sound('mouse');
+                case 'm': $.sound('krya'); break;
+                case 'r': $.sound('keyboard'); break;
+                case 'l': $.sound('mouse'); break;
             }
         }
     }

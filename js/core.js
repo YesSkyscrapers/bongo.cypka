@@ -143,8 +143,14 @@ $(document).ready(function() {
     }
 });
 $(document).on("keydown keyup", function (e) {
-    var action = ActionPerKeyEnum[e.key.toUpperCase()];
-    var key = KeyEnum[e.key.toUpperCase()];
+    var pressedKey = e.key.toUpperCase();
+
+    //russian keyboard compatibility
+    pressedKey = (pressedKey == 'Ф') ? 'A' : pressedKey;
+    pressedKey = (pressedKey == 'В') ? 'D' : pressedKey;
+
+    var action = ActionPerKeyEnum[pressedKey];
+    var key = KeyEnum[pressedKey];
     if (action != undefined && key != undefined) {
         if (action == ActionEnum.CHOOSE_FORM)
         {

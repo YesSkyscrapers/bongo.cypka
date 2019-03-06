@@ -162,14 +162,14 @@ $(document).ready(function() {
             }
         }
         $("header").css("visibility", "hidden");
-        $("#github").css("visibility", "hidden");
-        $("#bongo-left").css("visibility", "visible").on("touchstart touchend", function(e) { $.tap(e, "A") });
-        $("#bongo-right").css("visibility", "visible").on("touchstart touchend", function(e) { $.tap(e, "D") });
-        $("#piano-keys").css("visibility", "visible");
+        $("#mouse").css("visibility", "visible").on("touchstart touchend", function(e) { $.tap(e, "A") });
+        $("#keyboard").css("visibility", "visible").on("touchstart touchend", function(e) { $.tap(e, "D") });
+        $("#forms-keys").css("visibility", "visible");
+        $("#actions-keys").css("visibility", "visible");
         $("#key1").on("touchstart touchend", function(e) { $.tap(e, "1") });
         $("#key2").on("touchstart touchend", function(e) { $.tap(e, "2") });
         $("#key3").on("touchstart touchend", function(e) { $.tap(e, "3") });
-        $("#meow").css("visibility", "visible").on("touchstart touchend", function(e) { $.tap(e, " ") });
+        $("#krya").css("visibility", "visible").on("touchstart touchend", function(e) { $.tap(e, " ") });
     }
 });
 $(document).on("keydown keyup", function (e) {

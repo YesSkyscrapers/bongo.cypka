@@ -77,36 +77,6 @@ $.click = function(action, key, state){
         }
     }
 }
-$.play = function(instrument, key, state) {
-    var instrumentName = Object.keys(InstrumentEnum).find(k => InstrumentEnum[k] === instrument).toLowerCase();
-    var commonKey = KeyEnum[key];
-    var paw = (instrument == InstrumentEnum.BONGO ? key : key <= 5 && key != 0 ? 0 : 1);
-    var id = (instrument == InstrumentEnum.MEOW ? "#mouth" : '#' + (paw == 0 ? "l" : "r") + 'paw');
-    if (state == true) {
-        if (jQuery.inArray(commonKey, pressed) !== -1) {
-            return;
-        } else {
-            pressed.push(commonKey);
-        }
-        if (instrument != InstrumentEnum.MEOW) {
-            $(".instrument").each(function(index) {
-              if ($(this).attr('id') === instrumentName) {
-                $(this).css("visibility", "visible");
-              } else {
-                $(this).css("visibility", "hidden");
-              }
-            });
-        }
-        $.sound(instrumentName + key);
-    } else {
-        pressed.remove(commonKey);
-    }
-    if (instrument == InstrumentEnum.MEOW) {
-        $('#mouth').css("background-image", "url('images/1/m" + (state === true ? "2" : "1") + ".png')");
-    } else {
-        $(id).css("background-image", "url('images/1/" + (paw == 0 ? "l" : "r") + (state === true ? "2" : "1") + ".png')");
-    }
-}
 $.sound = function(filename) {
     lowLag.play(filename);
 }

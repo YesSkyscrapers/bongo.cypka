@@ -173,7 +173,7 @@ $(document).ready(function() {
             if (element.includes("initialform"))
             {
                 let keyPair = element.split("=");
-                $.chooseForm(FormEnum[FormPerKeyEnum[keyPair[1]]])
+                $.chooseForm(FormEnum[FormPerKeyEnum[keyPair[1]]], keyPair[1]);
             }
         });
     }

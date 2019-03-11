@@ -163,3 +163,6 @@ $(document).on("keydown keyup", function (e) {
         }
     }
 });
+$(document).ready(function() {
+    console.log(window.location.pathname);
+});

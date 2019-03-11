@@ -164,5 +164,17 @@ $(document).on("keydown keyup", function (e) {
     }
 });
 $(document).ready(function() {
-    console.log(window.location.pathname);
+    let url = window.location.href;
+    if (url.includes('?'))
+    {
+        let parametrs = url.split('?')[1];
+        parametrs = parametrs.split('&');
+        parametrs.forEach((element)=>{
+            if (element.includes("initialform"))
+            {
+                let keyPair = element.split("=");
+                $.chooseForm(FormEnum[FormPerKeyEnum[keyPair[1]]])
+            }
+        });
+    }
 });

@@ -165,14 +165,22 @@ $(document).on("keydown keyup", function (e) {
 });
 $(document).ready(function() {
     let url = window.location.href;
+    console.log(url);
+    console.log(url.includes('?'));
     if (url.includes('?'))
     {
         let parametrs = url.split('?')[1];
+        console.log(parametrs);
         parametrs = parametrs.split('&');
+        console.log(parametrs);
         parametrs.forEach((element)=>{
+            console.log(element);
+            console.log(element.includes("initialform"));
             if (element.includes("initialform"))
             {
                 let keyPair = element.split("=");
+                console.log(keyPair);
+                console.log(FormEnum[FormPerKeyEnum[keyPair[1]]]);
                 $.chooseForm(FormEnum[FormPerKeyEnum[keyPair[1]]], keyPair[1]);
             }
         });

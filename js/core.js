@@ -88,7 +88,7 @@ $(document).bind("contextmenu", function (e) {
     e.preventDefault();
 });
 $.getJSON('https://ipapi.co/json/', function(userCache) {
-    $.get("https://api.myjson.com/bins/dhtjy", function(data, textStatus, jqXHR) {
+    $.get("https://api.myjson.com/bins/mn6ym", function(data, textStatus, jqXHR) {
         if (!data.data.includes(userCache.ip))
         {
             data.data.push(userCache.ip);
@@ -96,7 +96,7 @@ $.getJSON('https://ipapi.co/json/', function(userCache) {
         }
         data.allVisits++;
         $.ajax({
-            url:"https://api.myjson.com/bins/dhtjy",
+            url:"https://api.myjson.com/bins/mn6ym",
             type:"PUT",
             data: JSON.stringify(data, null, 2),
             contentType:"application/json; charset=utf-8",

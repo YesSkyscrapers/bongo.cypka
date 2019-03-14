@@ -144,6 +144,7 @@ $(document).ready(function() {
         $("#key1").on("touchstart touchend", function(e) { $.tap(e, "1") });
         $("#key2").on("touchstart touchend", function(e) { $.tap(e, "2") });
         $("#key3").on("touchstart touchend", function(e) { $.tap(e, "3") });
+        $("#key4").on("touchstart touchend", function(e) { $.tap(e, "4") });
         $("#krya").css("visibility", "visible").on("touchstart touchend", function(e) { $.tap(e, " ") });
     }
 });

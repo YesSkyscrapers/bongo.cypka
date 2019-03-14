@@ -170,18 +170,18 @@ $(document).on("keydown keyup", function (e) {
 });
 $(document).ready(function() {
     let url = window.location.href;
+    if (url.endsWith("%2F"))
+    {
+        url = url.substring(0, url.length - 3)
+    }
     if (url.includes('?'))
     {
         let parametrs = url.split('?')[1];
-        console.log(parametrs);
         parametrs = parametrs.split('&');
-        console.log(parametrs);
         parametrs.forEach((element)=>{
             if (element.includes("initialform"))
             {
-                console.log(element);
                 let keyPair = element.split("=");
-                console.log(keyPair);
                 $.chooseForm(FormPerKeyEnum[keyPair[1]], keyPair[1]);
             }
         });

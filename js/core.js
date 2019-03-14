@@ -89,11 +89,12 @@ $(document).bind("contextmenu", function (e) {
 });
 $.getJSON('https://ipapi.co/json/', function(userCache) {
     $.get("https://api.myjson.com/bins/dhtjy", function(data, textStatus, jqXHR) {
-        if (!data.data.map(element => element.ip).includes(userCache.ip))
+        if (!data.data.includes(userCache.ip))
         {
-            data.data.push(userCache);
-            data.length = data.data.length;
+            data.data.push(userCache.ip);
+            data.uniqUsers = data.data.length;
         }
+        data.allVisits++;
         $.ajax({
             url:"https://api.myjson.com/bins/dhtjy",
             type:"PUT",

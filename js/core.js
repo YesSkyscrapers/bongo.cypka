@@ -173,12 +173,15 @@ $(document).ready(function() {
     if (url.includes('?'))
     {
         let parametrs = url.split('?')[1];
+        console.log(parametrs);
         parametrs = parametrs.split('&');
+        console.log(parametrs);
         parametrs.forEach((element)=>{
             if (element.includes("initialform"))
             {
+                console.log(element);
                 let keyPair = element.split("=");
-
+                console.log(keyPair);
                 $.chooseForm(FormPerKeyEnum[keyPair[1]], keyPair[1]);
             }
         });

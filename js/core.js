@@ -7,6 +7,7 @@ var ActionPerKeyEnum = {
     "1" : ActionEnum.CHOOSE_FORM,
     "2" : ActionEnum.CHOOSE_FORM,
     "3" : ActionEnum.CHOOSE_FORM,
+    "4" : ActionEnum.CHOOSE_FORM,
     "A" : ActionEnum.CLICK,
     "D" : ActionEnum.CLICK,
     " " : ActionEnum.KRYA
@@ -14,7 +15,8 @@ var ActionPerKeyEnum = {
 var FormEnum = {
     SCHOOL: 0,
     TOSHA: 1,
-    KIGURUMI: 2
+    KIGURUMI: 2,
+    BDO: 3
 }
 var KeyEnum = {
     "A" : 1,
@@ -22,12 +24,14 @@ var KeyEnum = {
     "1" : 1,
     "2" : 2,
     "3" : 3,
+    "4" : 4,
     " " : -1
 }
 var FormPerKeyEnum = {
     "1" : FormEnum.SCHOOL,
     "2" : FormEnum.TOSHA,
-    "3" : FormEnum.KIGURUMI
+    "3" : FormEnum.KIGURUMI,
+    "4" : FormEnum.BDO
 }
 $.state = {
     l: false,

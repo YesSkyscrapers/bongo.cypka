@@ -1,0 +1,56 @@
+@font-face {
+    font-family: 'Tele2TextSansSHORT-Bold';
+    src: url("https://devapp4t2.tele2.ru/stories/api/v1/StoriesSettings/file?fileType=fontbold");
+}
+
+.stories-slide {
+    box-shadow: 0px 2px 5px 2px rgba(12, 90, 119, 0.3);
+}
+
+.stories-slide._is-read {
+    background-color: white;
+}
+
+.stories-slide._is-read>.stories-slide__link {
+    opacity: 0.4;
+}
+
+.stories-viewer__close span {
+    width: 100px;
+    height: 100px;
+}
+
+.stories-slide-wrapper .stories-slide {
+    padding: 0;
+    border: 0;
+}
+
+.slider3d__inner,
+.slider3d__rotater {
+    /*
+    padding-top: 10px;
+    */
+}
+
+.stories-list-wrapper.loaded {
+    padding: 0 !important;
+}
+
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+}
+
+.stories-slide-wrapper:first-child {
+    margin-left: 0px;
+}
+
+.stories-slide-wrapper:last-child {
+    margin-right: 0px;
+}
+
+.stories-slide__content {
+    padding: 6px;
+}

@@ -52,5 +52,5 @@ body {
 }
 
 .stories-slide__content {
-    padding: 6px;
+    padding: 6px  !important;
 }

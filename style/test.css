@@ -54,3 +54,7 @@ body {
 .stories-slide__content {
     padding: 6px  !important;
 }
+
+.stories-list__viewport-inner .stories-slide-wrapper {
+    padding-bottom: 7px;
+}

@@ -15,11 +15,6 @@
     opacity: 0.4;
 }
 
-.stories-viewer__close span {
-    width: 50px;
-    height: 50px;
-}
-
 .stories-slide-wrapper .stories-slide {
     padding: 0;
     border: 0;
